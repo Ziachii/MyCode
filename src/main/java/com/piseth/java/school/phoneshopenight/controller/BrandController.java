@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import com.piseth.java.school.phoneshopenight.dto.BrandDTO;
 import com.piseth.java.school.phoneshopenight.entity.Brand;
 import com.piseth.java.school.phoneshopenight.service.BrandService;
-import com.piseth.java.school.phoneshopenight.service.util.Mapper;
 
 @RestController
 @RequestMapping("brands")
@@ -37,7 +36,7 @@ public class BrandController {
 	@GetMapping("{id}" )
 	public ResponseEntity<?> getOneBrand(@PathVariable("id") Integer brandId){
 		Brand brand = brandService.getById(brandId);
-		return ResponseEntity.ok(Mapper.toBrandDTO(brand));
+		return ResponseEntity.ok(BrandMapper.INSTANCE.toBrandDTO(brand));
 	}
 
 	//todo====================================
