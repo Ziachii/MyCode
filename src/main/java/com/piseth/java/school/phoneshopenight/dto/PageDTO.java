@@ -1,9 +1,6 @@
 package com.piseth.java.school.phoneshopenight.dto;
-
-import com.piseth.java.school.phoneshopenight.service.util.PageUtil;
 import lombok.Data;
 import org.springframework.data.domain.Page;
-
 import java.util.List;
 @Data
 public class PageDTO {

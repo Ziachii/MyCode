@@ -4,6 +4,7 @@ import com.piseth.java.school.phoneshopenight.exception.ResourceNotFoundExceptio
 import com.piseth.java.school.phoneshopenight.service.util.PageUtil;
 import com.piseth.java.school.phoneshopenight.spec.BrandFilter;
 import com.piseth.java.school.phoneshopenight.spec.BrandSpec;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,9 +16,10 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
 public class BrandServiceImpl implements BrandService{
 	@Autowired
-	private BrandRepository brandRepository;
+	private final BrandRepository brandRepository;
 
 	@Override
 	public Brand create(Brand brand) {
