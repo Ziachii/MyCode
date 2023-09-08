@@ -9,7 +9,7 @@ import com.piseth.java.school.phoneshopenight.entity.Brand;
 import java.util.List;
 
 @Repository
-public interface BrandRepository extends JpaRepository<Brand, Integer> , JpaSpecificationExecutor<Brand> {
+public interface BrandRepository extends JpaRepository<Brand, Long> , JpaSpecificationExecutor<Brand> {
     //todo custom method find by name (name can has a lot
     // so well create with list)
     List<Brand> findByNameLike(String name);
