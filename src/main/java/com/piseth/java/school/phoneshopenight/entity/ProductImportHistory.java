@@ -1,10 +1,13 @@
 package com.piseth.java.school.phoneshopenight.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Data
 @Entity
 @Table(name = "productImportHistories")
@@ -15,7 +18,8 @@ public class ProductImportHistory {
 	private Long id;
 
 	@Column(name = "date_import")
-	private LocalDate dateImport;
+
+	private LocalDateTime dateImport;
 	
 	@Column(name = "import_unit")
 	private Integer importUnit;

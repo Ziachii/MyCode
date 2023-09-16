@@ -1,5 +1,7 @@
 package com.piseth.java.school.phoneshopenight.utils;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import java.util.List;
 
 public class GeneralUtils {
@@ -13,5 +15,12 @@ public class GeneralUtils {
                 .filter(x -> x%2 == 0)
                 .toList();
 
+    }
+    //todo ===========================
+   // @Test
+   public void showPassword(){
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encode = passwordEncoder.encode("dara123");
+        System.out.println(encode);
     }
 }

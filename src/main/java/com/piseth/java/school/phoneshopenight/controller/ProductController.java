@@ -1,26 +1,22 @@
 package com.piseth.java.school.phoneshopenight.controller;
 
-import com.piseth.java.school.phoneshopenight.Mapper.BrandMapper;
-import com.piseth.java.school.phoneshopenight.Mapper.ModelEntityMapper;
 import com.piseth.java.school.phoneshopenight.Mapper.ProductMapper;
-import com.piseth.java.school.phoneshopenight.dto.*;
-import com.piseth.java.school.phoneshopenight.entity.Brand;
-import com.piseth.java.school.phoneshopenight.entity.Model;
+import com.piseth.java.school.phoneshopenight.dto.PriceDTO;
+import com.piseth.java.school.phoneshopenight.dto.ProductDTO;
+import com.piseth.java.school.phoneshopenight.dto.ProductImportDTO;
 import com.piseth.java.school.phoneshopenight.entity.Product;
-import com.piseth.java.school.phoneshopenight.service.BrandService;
-import com.piseth.java.school.phoneshopenight.service.ModelService;
 import com.piseth.java.school.phoneshopenight.service.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
+import javax.validation.Valid;
 import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("product")
+@RequestMapping("products")
 public class ProductController {
 
 	private final ProductService productService;
@@ -36,9 +32,19 @@ public class ProductController {
 	}
 
 	@PostMapping("importProduct")
-	public ResponseEntity<?> importProduct(@RequestBody ProductImportDTO importDTO){
+	public ResponseEntity<?> importProduct(@RequestBody @Valid ProductImportDTO importDTO){
 	 	productService.importProduct(importDTO);
 		return ResponseEntity.ok().build();
 	}
+	@PostMapping("{productId}/setSalePrice")
+	public ResponseEntity<?> setSalePrice(@PathVariable Long productId, @RequestBody PriceDTO priceDTO){
+		productService.setSalePrice(productId, priceDTO.getPrice());
+		return ResponseEntity.ok().build();
+	}
 
+	@PostMapping("uploadProduct")
+	public ResponseEntity<?> uploadProduct( @RequestParam ("file") MultipartFile file){
+		Map<Integer, String> errorMap = productService.uploadProduct(file);
+		return ResponseEntity.ok(errorMap);
+	}
 }

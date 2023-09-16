@@ -2,23 +2,21 @@ package com.piseth.java.school.phoneshopenight.controller;
 
 import com.piseth.java.school.phoneshopenight.Mapper.BrandMapper;
 import com.piseth.java.school.phoneshopenight.Mapper.ModelEntityMapper;
+import com.piseth.java.school.phoneshopenight.dto.BrandDTO;
 import com.piseth.java.school.phoneshopenight.dto.ModelDTO;
 import com.piseth.java.school.phoneshopenight.dto.PageDTO;
+import com.piseth.java.school.phoneshopenight.entity.Brand;
 import com.piseth.java.school.phoneshopenight.entity.Model;
+import com.piseth.java.school.phoneshopenight.service.BrandService;
 import com.piseth.java.school.phoneshopenight.service.ModelService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import com.piseth.java.school.phoneshopenight.dto.BrandDTO;
-import com.piseth.java.school.phoneshopenight.entity.Brand;
-import com.piseth.java.school.phoneshopenight.service.BrandService;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("brands")
@@ -38,6 +36,7 @@ public class BrandController {
 	}*/
 	//todo ============CREATE===========================
 	//todo second way using brand in postman
+	@PreAuthorize("hasAuthority('brand:write')")
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<?> create(@RequestBody BrandDTO brandDTO) {
 		//Brand brand = Mapper.toBrand(brandDTO);todo instead of BrandMapper
@@ -80,6 +79,7 @@ public class BrandController {
 		return ResponseEntity.ok(list);
 	}*/
 	//todo ================entity have many params(have to use map)=====================
+	@PreAuthorize("hasAuthority('brand:read')")
 	@GetMapping
 	public ResponseEntity<?> getBrands(@RequestParam Map<String, String> params){
 		Page<Brand> page = brandService.getBrands(params);

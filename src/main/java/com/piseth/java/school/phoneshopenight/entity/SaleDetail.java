@@ -23,10 +23,10 @@ public class SaleDetail {
 	@JoinColumn(name = "product_id")
 	private Product product;
 
-	@Column(name = "amount")
+	@Column(name = "sold_amount")
 	protected BigDecimal amount;
 
-	@Column(name = "unit")
+
 	private Integer unit;
 
 }
